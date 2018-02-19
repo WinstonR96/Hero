@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20180216202957) do
     t.string "name"
     t.text "description"
     t.text "photo"
+    t.integer "estado", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

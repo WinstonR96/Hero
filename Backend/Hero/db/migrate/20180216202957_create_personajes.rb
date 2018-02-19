@@ -4,6 +4,7 @@ class CreatePersonajes < ActiveRecord::Migration[5.1]
       t.string :name
       t.text :description
       t.text :photo
+      t.integer :estado, :default => 1
 
       t.timestamps
     end

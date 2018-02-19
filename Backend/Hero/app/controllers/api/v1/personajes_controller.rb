@@ -1,18 +1,22 @@
 module Api
   module V1
     class PersonajesController < ApplicationController
-      before_action :set_personaje, only: [:show, :update, :destroy]
+      before_action :set_personaje, only: [:show, :update, :destroy, :delete]
     
       # GET /personajes
       def index
-        @personajes = Personaje.all
-    
+        #@personajes = Personaje.all
+        @personajes = Personaje.where("estado = 1")
         render json: @personajes
       end
     
       # GET /personajes/1
       def show
-        render json: @personaje
+        if (@personaje.estado == 1)
+          render json: @personaje
+        else 
+          render json: {status: 'Failed', message: 'Usuario no se encuentra habilitado'}
+        end
       end
     
       # POST /personajes
@@ -37,8 +41,14 @@ module Api
     
       # DELETE /personajes/1
       def destroy
-        @personaje.destroy
+       if @personaje.update(estado: -1)
+        render json: {status: "success", message: "Eliminado"}
+       else
+        render json: {status: "failed", message: "No se pudo eliminar"}
+       end
       end
+
+      
     
       private
         # Use callbacks to share common setup or constraints between actions.
