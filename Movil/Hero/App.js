@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, Button, Image, ListView } from 'react-native';
+import { StyleSheet, Text, View, Alert, Button, Image, ListView, FlatList } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 
 export default class App extends React.Component {
 
@@ -48,14 +49,28 @@ export default class App extends React.Component {
     </View>
   );
 
+  flatData = (data) => (
+    <View> 
+      <Text>{data.name}</Text>
+      <Image
+        style={{ width: 350, height: 350 }}
+        source={{ uri: data.photo }}
+      />
+    </View>
+  );
+
 
 
   render() {
     return (
       <View style={styles.container}>
-        <ListView
+        {/*<ListView
           dataSource={this.state.datasource}
           renderRow={this.rowData}
+        />*/}
+        <FlatList 
+          data = {this.state.datasource}
+          renderItem = {this.flatData}
         />
       </View>
     );
