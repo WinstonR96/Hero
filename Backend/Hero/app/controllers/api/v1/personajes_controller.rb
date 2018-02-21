@@ -24,18 +24,18 @@ module Api
         @personaje = Personaje.new(personaje_params)
     
         if @personaje.save
-          render json: @personaje, status: :created, location: @personaje
+          render json: {status: 'success', message: 'creado' data:@personaje}
         else
-          render json: @personaje.errors, status: :unprocessable_entity
+          render json: {status: 'failed', message: 'No se pudo crear' data:@personaje}
         end
       end
     
       # PATCH/PUT /personajes/1
       def update
         if @personaje.update(personaje_params)
-          render json: @personaje
+          render json: {status: 'success', message: 'actualizado' data:@personaje}
         else
-          render json: @personaje.errors, status: :unprocessable_entity
+          render json: {status: 'failed', message: 'No se pudo actualizar' data:@personaje}
         end
       end
     
